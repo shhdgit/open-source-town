@@ -1,8 +1,8 @@
 export default async function fetcher<JSON = any>(ignore): Promise<JSON> {
-    const queryParams = new URLSearchParams({
-        "user": "explorer",
-        "default_format": "JSON",
-        "query": `
+  const queryParams = new URLSearchParams({
+    user: "explorer",
+    default_format: "JSON",
+    query: `
             SELECT *
             FROM
             (
@@ -19,11 +19,10 @@ export default async function fetcher<JSON = any>(ignore): Promise<JSON> {
             WHERE n <= 5
             ORDER BY t, n ASC
             SETTINGS allow_experimental_window_functions = 1
-        `
-    });
-    const response = await fetch(`https://play.clickhouse.com/?${queryParams}`, {
-        method: "GET",
-        mode: "no-cors",
-    });
-    return response.json();
+        `,
+  });
+  const response = await fetch(`https://play.clickhouse.com/?${queryParams}`, {
+    method: "GET",
+  });
+  return response.json();
 }
